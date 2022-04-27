@@ -1,0 +1,10 @@
+# MacOS Desktop Services Store
+.DS_Store
+._.DS_Store
+
+# VSCode
+.vscode/*
+*/.vscode/*
+
+*.env
+
