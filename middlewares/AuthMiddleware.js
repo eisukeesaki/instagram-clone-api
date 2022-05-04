@@ -23,7 +23,25 @@ function establishSession(req, res) {
   res.sendStatus(200);
 }
 
+function ensureLoggedIn(req, res, next) {
+  if (!req.session.loggedIn) return res.sendStatus(401);
+  else next();
+}
+
+async function getSelfUser(req, res, next) {
+  if (!req.session.loggedIn) return res.sendStatus(401);
+  else {
+    const user = await User.findOne({ where: { username: req.session.username }});
+    if (!user) {
+      return res.status(404).send({ message: "user not found"});
+    }
+    res.json(user);
+  }
+}
+
 module.exports = {
   authenticate,
-  establishSession
+  establishSession,
+  ensureLoggedIn,
+  getSelfUser
 }

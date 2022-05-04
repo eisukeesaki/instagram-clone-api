@@ -8,9 +8,11 @@ const AuthMiddleware = require("./middlewares/AuthMiddleware");
 const UserController = require("./controllers/UserController");
 const PhotoController = require("./controllers/PhotoController");
 
+routes.get("/", AuthMiddleware.ensureLoggedIn, (req, res) => res.redirect("/photos"));
+routes.get("/auth", AuthMiddleware.getSelfUser);
 routes.post("/auth", AuthMiddleware.authenticate, AuthMiddleware.establishSession);
-routes.get("/users", UserController.getAllUsers);
 routes.get("/photos", PhotoController.getAllPhotos);
+// routes.get("/users", UserController.getAllUsers); // TODO: restrict access to admins
 
 module.exports = routes;
 

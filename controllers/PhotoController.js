@@ -7,7 +7,7 @@ async function getAllPhotos(req, res) {
     if (!photos) {
       return res.status(404).send({ message: "photos not found"});
     }
-    return res.json({ photos });
+    res.json({ photos });
   }
 }
 
