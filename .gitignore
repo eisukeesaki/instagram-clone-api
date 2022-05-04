@@ -9,7 +9,7 @@
 *.env
 
 node_modules
-ignore
+.gitignored
 seeders
 *.bak
 config
