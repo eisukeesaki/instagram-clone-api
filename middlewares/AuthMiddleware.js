@@ -1,4 +1,4 @@
-const User = require("./models/user");
+const User = require("../models/user");
 
 async function authenticate(req, res, next) {
   console.log("req.body.username:" + req.body.username);

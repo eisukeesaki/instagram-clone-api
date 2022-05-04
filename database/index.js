@@ -1,8 +1,8 @@
 const Sequelize = require("sequelize");
-const dbConfig = require("./config/dbConfig");
+const dbConfig = require("./dbConfig");
 
-const User = require("./models/user");
-const Photo = require("./models/photo");
+const User = require("../models/user");
+const Photo = require("../models/photo");
 
 const connection = new Sequelize(dbConfig);
 

@@ -4,7 +4,7 @@ const routes = Router();
 
 // const passport = require("./passport");
 
-const AuthMiddleware = require("./AuthMiddleware");
+const AuthMiddleware = require("./middlewares/AuthMiddleware");
 const UserController = require("./controllers/UserController");
 const PhotoController = require("./controllers/PhotoController");
 
