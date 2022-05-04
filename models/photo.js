@@ -7,7 +7,8 @@ class Photo extends Model {
     super.init(
       {
         body: DataTypes.TEXT,
-        photo_url: DataTypes.STRING
+        photo_url: DataTypes.STRING,
+        likes: DataTypes.INTEGER
       },
       {
         sequelize,
