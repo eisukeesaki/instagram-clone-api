@@ -12,6 +12,7 @@ app.use(morgan("immediate"));
 
 app.use(
   session({
+    // TODO: optimize options
     secret: process.env.SESSION_SECRET,
     name: "sessionID",
     saveUninitialized: false,
@@ -28,9 +29,30 @@ app.use(routes);
 
 app.listen(PORT);
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+/*
 
-[express.urlencoded, express.json, body-parser]
-    parse req.body of POSTs
+    session([options[cookieObj]])
+        http://expressjs.com/en/resources/middleware/session.html
+        r/w cookies on req/res
+        data saved in cookie
+            session ID
+            not session data
+        options
+            secret
+                used to sign session ID cookie
+            name
+                of session ID cookie
+                    set in
+                        req
+                        res
+            saveUninitialized
+                force save new, unmodified session
+            resave
+                force save back unmodified session 
 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    [ express.urlencoded, express.json ]
+        body-parser
+            parse req.body of POSTs
+
+*/
+

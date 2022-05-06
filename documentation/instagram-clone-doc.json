@@ -1,0 +1,98 @@
+{
+    "openapi": "2.0",
+    "info": {
+        "title": "Instagram Clone",
+        "description": "An Instagram Clone Server based on the OpenAPI 3.0 specification.\n[GitHub Repository](http://github.com/eisukeesaki/instagram-clone)",
+        "contact": { "email": "acekay.dev@protonmail.com" },
+        "license": { "name": "Apache 2.0", "url": "http://www.apache.org/licenses/LICENSE-2.0.html" },
+        "version": "0.0.1"
+    },
+    "servers": [{ "url": "/api/v0" }],
+    "tags": [
+        { "name": "photos", "description": "about photos"},
+        { "name": "auth", "description": "user authentication"},
+        { "name": "users", "description": "operations about users"}
+    ],
+    "paths": {
+        "/photos": {
+            "get": {
+                "tags": ["photos"],
+                "summary": "returns all photos",
+                "description": "Get all photos",
+                "operationId": "getAllPhotos",
+                "responses": {
+                    "200": { "description": "successful operation", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Photo" } } } },
+                    "401": { "description": "unauthorized access"},
+                    "404": { "description": "resource not found"}
+                }
+            }
+        },
+        "/auth": {
+            "get": {
+                "tags": ["auth"],
+                "summary": "authenticates user into the system",
+                "description": "",
+                "operationId": "ensureLoggedIn",
+                "responses": {
+                    "200": { "description": "successful operation",  "content": { "application/json": { "schema": { "$ref": "#/components/schemas/User" } } } },
+                    "400": { "description": "invalid username/password"}
+                }
+            },
+            "post": {
+                "tags": ["auth"],
+                "summary": "Authenticates user into the system",
+                "description": "",
+                "operationId": "authenticate",
+                "parameters": [
+                    { "name": "username", "in": "query", "description": "The user name for login", "required": true, "schema": { "type": "string" } },
+                    { "name": "password", "in": "query", "description": "The password for login in clear text", "required": true, "schema": { "type": "string" } }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {},
+                        "content": {}
+                    },
+                    "400": { "description": "Invalid username/password supplied" }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": ["users"],
+                "summary": "returns all users",
+                "description": "Get all users",
+                "operationId": "getAllUsers",
+                "responses": {
+                    "200": { "description": "successful operation", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/User" } } } },
+                    "400": { "description": "resource not found" }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "integer", "format": "", "example": 42 },
+                    "username": { "type": "string", "example": "Magi" },
+                    "password": { "type": "string", "example": "iknowthatihavetohashthis" },
+                    "createdAt": { "type": "string", "example": "2022-05-01 14:27:51.199-07" },
+                    "updatedAt": { "type": "string", "example": "2022-05-01 14:27:51.199-07" }
+                }
+            },
+            "Photo": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "integer", "format": "", "example": 42 },
+                    "body": { "type": "string", "example": "I'm at starbucks." },
+                    "likes": { "type": "integer", "example": "42" },
+                    "createdAt": { "type": "string", "example": "2022-05-01 14:27:51.199-07" },
+                    "updatedAt": { "type": "string", "example": "2022-05-01 14:27:51.199-07" }
+                }
+            }
+        },
+        "requestBodies": {}
+    } 
+}

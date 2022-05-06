@@ -11,12 +11,18 @@ const PhotoController = require("./controllers/PhotoController");
 routes.get("/", AuthMiddleware.ensureLoggedIn, (req, res) => res.redirect("/photos"));
 routes.get("/auth", AuthMiddleware.getSelfUser);
 routes.post("/auth", AuthMiddleware.authenticate, AuthMiddleware.establishSession);
+routes.post("/logout", AuthMiddleware.logout);
 routes.get("/photos", PhotoController.getAllPhotos);
 // routes.get("/users", UserController.getAllUsers); // TODO: restrict access to admins
 
 module.exports = routes;
 
 /*
+
+    TODO
+        /logout
+            destroy session
+            ?redirect /
 
     route
         HTTP request method

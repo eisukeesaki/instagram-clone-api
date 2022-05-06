@@ -1,9 +1,6 @@
 const User = require("../models/user");
 
 async function authenticate(req, res, next) {
-  console.log("req.body.username:" + req.body.username);
-  console.log("req.body.password:" + req.body.password);
-
   const user = await User.findOne({ where: { username: req.body.username }});
   if (!user) res.status(401).send("requested username does not match our records");
   else if (req.body.password == user.password) {
@@ -12,14 +9,16 @@ async function authenticate(req, res, next) {
   } else res.status(401).send("incorrect password");
 }
 
+async function logout(req, res, next) {
+  req.session.destroy((err) => { console.log("@logout error.", err); });
+  res.sendStatus(200);
+}
+
 function establishSession(req, res) {
   req.session.loggedIn = true;
   req.session.username = res.locals.username;
-
   console.log("@establishSession req.session = " + JSON.stringify(req.session, null, 4));
-  console.log("@establishSession user authentication successful");
-  console.log("@establishSession session establishment successful");
-
+  console.log("@establishSession user authentication and session establishment successful");
   res.sendStatus(200);
 }
 
@@ -43,5 +42,12 @@ module.exports = {
   authenticate,
   establishSession,
   ensureLoggedIn,
-  getSelfUser
+  getSelfUser,
+  logout
 }
+
+/*
+
+
+
+*/

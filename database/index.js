@@ -31,3 +31,9 @@ Photo.init(connection);
 // - - - - - - - - - - - - - - - - - - + - - - - - - - - - - - - - - test db connection
 
 module.exports = connection;
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+connect to db server instance to db
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
